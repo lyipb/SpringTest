@@ -77,13 +77,14 @@ public class RestUploadController {
 
         try {
         	File file = new File(UPLOADED_FOLDER);
-            if (!file.exists()) {
+            if (!file.isDirectory()) {
                 if (file.mkdir()) {
-                	logger.info("Directory is created!");
+                	logger.info(file.getPath()+" is created!");
                 } else {
-                    logger.info("Failed to create directory!");
+                    logger.info("Failed to create "+ file.getPath());
                 }
             }
+
 
             saveUploadedFiles(Arrays.asList(uploadfiles));
 
