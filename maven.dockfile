@@ -1,0 +1,68 @@
+#
+# Oracle Java 7 Dockerfile
+#
+# https://github.com/dockerfile/java
+# https://github.com/dockerfile/java/tree/master/oracle-java7
+#
+
+# Pull base image.
+FROM alpine as build
+
+ARG MAVEN_VERSION=3.8.1
+ARG TOMCAT_VERSION=9.0.46
+ARG USER_HOME_DIR="/root"
+ARG CURL_DOWNLOAD_LINK=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
+ARG TOMCAT_DOWNLOAD_LINK=https://mirror-hk.koddos.net/apache/tomcat/tomcat-9/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz 
+
+# Install Java.
+RUN apk --update --no-cache add openjdk8 curl 
+
+
+
+RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
+ && curl -fsSL -o /tmp/apache-maven.tar.gz ${CURL_DOWNLOAD_LINK}  \
+ && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
+ && rm -f /tmp/apache-maven.tar.gz \
+ && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+
+RUN mkdir  /apache-tomcat  \
+&& curl -fsSL -o /tmp/apache-tomcat.tar.gz ${TOMCAT_DOWNLOAD_LINK}  \
+&& tar -xzf /tmp/apache-tomcat.tar.gz -C /apache-tomcat --strip-components=1 \
+&& rm -f /tmp/apache-tomcat.tar.gz 
+
+#wget -qO- ${TOMCAT_DOWNLOAD_LINK} | tar xvz -
+
+#ADD ${TOMCAT_DOWNLOAD_LINK}  /tmp
+#RUN mkdir  /apache-tomcat && tar -zxvf /tmp/apache-tomcat-${TOMCAT_VERSION}-src.tar.gz  -C /apache-tomcat
+#RUN rm /tmp/apache-tomcat-${TOMCAT_VERSION}-src.tar.gz
+
+ENV MAVEN_HOME /usr/share/maven
+ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
+ENV JAVA_HOME /usr/lib/jvm/default-jvm/
+
+# Define default command.
+#CMD ["mvn", "--version"]
+
+EXPOSE 8080
+
+CMD ["/apache-tomcat/bin/catalina.sh", "run"]
+
+#RUN cd /usr/local/tomcat
+
+#RUN chmod -R 755 /apache-tomcat/bin
+
+#RUN cd /apache-tomcat-${TOMCAT_VERSION}/bin
+
+#CMD ["catalina.sh", "run"]
+
+#CMD ["usr/local/tomcat/bin/catalina.sh", "run"]
+
+#CMD ["/apache-tomcat-${TOMCAT_VERSION}/bin/catalina.sh", "run"]
+
+
+# Spring docker sample
+# FROM openjdk:8-jdk-alpine
+# VOLUME /tmp
+# ARG JAR_FILE
+# COPY ${JAR_FILE} app.jar
+# ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
