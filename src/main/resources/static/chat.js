@@ -13,7 +13,7 @@ function setConnected(connected) {
 }
 //連結WebSocket方法
 function connect() {
-    var socket = new SockJS('localhost:8080/springtest/endpointChatRoom'); //建立一個socket物件 名稱為:/endpointChatRoom
+    var socket = new SockJS(window.location.host + '/endpointChatRoom'); //建立一個socket物件 名稱為:/endpointChatRoom
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
