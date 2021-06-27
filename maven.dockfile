@@ -45,7 +45,9 @@ ENV JAVA_HOME /usr/lib/jvm/default-jvm/
 
 EXPOSE 8080
 
-CMD ["/apache-tomcat/bin/catalina.sh", "run"]
+WORKDIR /apache-tomcat/bin/
+
+#CMD ["/apache-tomcat/bin/catalina.sh", "run"]
 
 #RUN cd /usr/local/tomcat
 
@@ -53,7 +55,7 @@ CMD ["/apache-tomcat/bin/catalina.sh", "run"]
 
 #RUN cd /apache-tomcat-${TOMCAT_VERSION}/bin
 
-#CMD ["catalina.sh", "run"]
+CMD ["catalina.sh", "run"]
 
 #CMD ["usr/local/tomcat/bin/catalina.sh", "run"]
 
