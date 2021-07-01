@@ -11,7 +11,7 @@
 	<groupId>com.tutorial</groupId>
 	<artifactId>SpringTest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+    <packaging>war</packaging> 
 	<name>SpringTest</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -130,34 +130,33 @@
 	        <version>3.3.7</version>
 	    </dependency>
 
+		
+		<dependency>
+		    <groupId>org.junit.vintage</groupId>
+		    <artifactId>junit-vintage-engine</artifactId>
+		    <scope>test</scope>
+		    <exclusions>
+		        <exclusion>
+		            <groupId>org.hamcrest</groupId>
+		            <artifactId>hamcrest-core</artifactId>
+		        </exclusion>
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>2.10.2</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId> 
+		    <version>2.10.2</version>
+		</dependency>
 
-<dependency>
-    <groupId>org.junit.vintage</groupId>
-    <artifactId>junit-vintage-engine</artifactId>
-    <scope>test</scope>
-    <exclusions>
-        <exclusion>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-        </exclusion>
-    </exclusions>
-</dependency>
+</dependencies>
 
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-core</artifactId>
-    <version>2.10.2</version>
-</dependency>
-
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId> 
-    <version>2.10.2</version>
-</dependency>
-
-
-	
-	</dependencies>
 
 	<build>
 		<plugins>
@@ -166,7 +165,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>springtest</finalName>
+		<finalName>springtest</finalName> 
 	</build>
 
 </project>

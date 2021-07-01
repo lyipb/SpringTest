@@ -29,7 +29,9 @@ public class RestUploadController {
     private final Logger logger = LoggerFactory.getLogger(RestUploadController.class);
 
     //Save the uploaded file to this folder
+
     private static String UPLOADED_FOLDER = "/Users/lyipb/eclipse-workspace/upload";
+
 
     // 3.1.1 Single file upload
     @SuppressWarnings("unchecked")

@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 public class UploadController {
 
     //Save the uploaded file to this folder
-	private static String UPLOADED_FOLDER = "/Users/lyipb/eclipse-workspace/upload/";
+	private static String UPLOADED_FOLDER = "/usr/local/upload/";
 
     @GetMapping("/uploadPage")
     public String index() {
